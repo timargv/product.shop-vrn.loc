@@ -5,18 +5,13 @@ namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property int $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property mixed $products
- * @property mixed $parent_id
- * @property mixed $products_category
- */
+
 class Category extends Model
 {
 
     use Sluggable;
+
+    protected $fillable = ['title'];
 
     // -------------------------
     public function products() {

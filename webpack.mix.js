@@ -24,7 +24,7 @@ mix.styles([
     'resources/assets/admin/dist/css/skins/_all-skins.min.css'
 ], 'public/css/admin.css');
 
-mix.combine([
+mix.scripts([
     'resources/assets/admin/plugins/jQuery/jquery-2.2.3.min.js',
     'resources/assets/admin/bootstrap/js/bootstrap.min.js',
     'resources/assets/admin/plugins/select2/select2.full.min.js',
