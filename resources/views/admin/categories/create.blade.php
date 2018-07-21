@@ -28,7 +28,7 @@
                           <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title')}}">
                       </div>
                       <div class="form-group">
-                          <label for="exampleInputEmail1">Позиция</label>
+                          <label for="exampleInputEmail1">Позиция а</label>
                           <input type="text" name="position" class="form-control" id="example1" placeholder="Позиция категории число" value="{{ old('position')}}">
                       </div>
                   </div>
