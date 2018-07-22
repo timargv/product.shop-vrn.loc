@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Kalnoy\Nestedset\NestedSet;
 
 class CreateCategoriesTable extends Migration
 {
@@ -17,14 +18,15 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('title');
-            $table->integer('parent_id')->default(0);
+            $table->nestedSet();
             $table->integer('position')->nullable();
-            $table->integer('level')->default(0);
             $table->string('icon')->nullable();
             $table->string('image')->nullable();
             $table->text('text')->nullable();
             $table->timestamps();
         });
+
+
     }
 
     /**

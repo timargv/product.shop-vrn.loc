@@ -4,14 +4,15 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
-
+use  \Kalnoy\Nestedset\NodeTrait;
 
 class Category extends Model
 {
 
-    use Sluggable;
+//    use Sluggable;
+    use NodeTrait;
 
-    protected $fillable = ['title', 'position'];
+    protected $fillable = ['title', 'parent_id'];
 
     // -------------------------
     public function products() {
@@ -21,12 +22,6 @@ class Category extends Model
             'category_id',
             'product_id'
         );
-    }
-
-
-    // -------------------------
-    public function parentId() {
-        return $this->hasMany(Category::class, 'parent_id');
     }
 
 

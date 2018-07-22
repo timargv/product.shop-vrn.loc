@@ -54,5 +54,9 @@ class Product extends Model
   }
 
 
+  // --------------------------
+  public function add(){
+
+  }
 
 }

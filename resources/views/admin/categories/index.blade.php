@@ -19,66 +19,71 @@
       <!-- Main content -->
       <section class="content">
 
-          <!-- Default box -->
           <div class="box">
-              <div class="box-header">
-                  <h3 class="box-title">Список {{$title}}</h3>
-              </div>
-              <!-- /.box-header -->
+              <div class="box-header"></div>
               <div class="box-body">
-                  <div class="form-group">
-                      <a href="{{ route('categories.create') }}" class="btn btn-success">Добавить</a>
-                      {!! Form::open(['route' => 'categories.store', 'class' => 'form-inline pull-right']) !!}
-
-                        <div class="form-group">
-                          <input type="text" class="form-control" name="title" id="exampleInputEmail1" placeholder="Категория">
-
-                        </div>
-                        <div class="form-group" style="width: 180px;">
-                          <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                          </select>
-                        </div>
-                        <button class="btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Быстрое создание</button>
-                        @include('admin.errors')
-                      {!! Form::close() !!}
-
-                  </div>
-
-
-                  <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Категория</th>
-                          <th>Родительская категория</th>
-                          <th>Позиция</th>
-                          <th>Действия</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-
-                      @foreach($categories as $category)
-                          <tr>
-                              <td>{{ $category->id  }}</td>
-                              <td>{{ $category->title }}</td>
-                              <td>{{ $category->parent_id }}</td>
-                              <td>{{ $category->position }}</td>
-                              <td><a href="{{ route('categories.edit', $category->id)}}" class="fa fa-pencil"></a> <a href="#" class="fa fa-remove"></a></td>
-                          </tr>
-                      @endforeach
-                      </tfoot>
-                  </table>
+                  <ul>
+                  @foreach($categories as $category)
+                          <li><a href="{{route('categories.index')}}/{{$category->slug}}">{{ $category->title }}</a>
+                          @if ($category->children)
+                              <ul>
+                                  @foreach ($category->children as $cats)
+                                      <li><a href="{{route('categories.index')}}/{{$category->slug}}/{{ $cats->slug }}">{{ $cats->title }}</a>
+                                          @if ($cats->children)
+                                              <ul>
+                                                  @foreach ($cats->children as $cat)
+                                                      <li><a href="{{route('categories.index')}}/{{$category->slug}}/{{ $cats->slug }}/{{ $cat->slug }}">{{ $cat->title }}</a>
+                                                          @if ($cat->children)
+                                                              <ul>
+                                                                  @foreach ($cat->children as $subcat)
+                                                                      <li><a href="{{$cats->slug}}/{{ $subcat->slug }}">{{ $subcat->title }}</a></li>
+                                                                  @endforeach
+                                                              </ul>
+                                                          @endif
+                                                      </li>
+                                                  @endforeach
+                                              </ul>
+                                          @endif
+                                      </li>
+                                  @endforeach
+                              </ul>
+                          @endif
+                      </li>
+                  @endforeach
+                  </ul>
               </div>
-              <!-- /.box-body -->
           </div>
-          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              Деревоadad
+            </div>
+            <div class="box-body">
+              @foreach($categories as $category)
+                <div class="col-md-12">
+                    <h5>{{ $category->title }}</h5>
+                    <hr />
+                    <div class="row">
+                        @foreach($category->children as $cats)
+                        <div class="col-md-4">
+                            <h6>{{ $cats->title }}</h6>
+                            <hr />
+                            @foreach($cats->children as $cat)
+                            <div>{{$cat->title}}</div>
+                                @foreach($cat->children as $subcat)
+                                    <div>-- {{$subcat->title}}</div>
+                                @endforeach
+                            @endforeach
+                        </div>
+                        @endforeach
+                      </div>
+                    </div>
+                @endforeach
+            </div>
+          </div>
+
+
+
 
       </section>
       <!-- /.content -->

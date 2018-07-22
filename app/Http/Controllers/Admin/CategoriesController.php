@@ -11,7 +11,7 @@ class CategoriesController extends Controller
 
     // --------------------
     public function index() {
-        $categories = Category::all();
+        $categories = Category::get()->toTree();
         return view('admin.categories.index', ['title' => 'Категория', 'categories' => $categories]);
     }
 
