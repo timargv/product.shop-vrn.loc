@@ -10,15 +10,9 @@ class CategoriesController extends Controller
 {
 
     // --------------------
-    public function index() {
-        $categories = Category::get()->toTree();
-        return view('admin.categories.index', ['title' => 'Категория', 'categories' => $categories]);
-    }
-
-
-    // --------------------
     public function create() {
-        return view('admin.categories.create');
+        $categories = Category::pluck('title', 'id')->all();
+        return view('admin.categories.create', ['categories' => $categories]);
     }
 
 
@@ -27,10 +21,9 @@ class CategoriesController extends Controller
 
         $this->validate($request, [
             'title' => 'required',
-            'position' => 'required|numeric'
         ]);
         Category::create($request->all());
-        return redirect()->route('categories.index');
+        return redirect()->route('catlists.index');
     }
 
 

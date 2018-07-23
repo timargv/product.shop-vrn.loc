@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use \Kalnoy\Nestedset\NodeTrait;
 class CategoryTableSeeder extends Seeder
 {
     /**
@@ -15,23 +15,54 @@ class CategoryTableSeeder extends Seeder
 
             [
                 'title' => 'Electronics',
+                'slug' => 'electronics',
                 'children' => [
                     [
                         'title' => 'TV',
+                        'slug' => 'tv',
                         'children' => [
-                            ['title' => 'LED'],
-                            ['title' => 'Blu-ray'],
+                            ['title' => 'LED', 'slug' => 'led'],
+                            ['title' => 'Blu-ray', 'slug' => 'blu-ray'],
                         ],
                     ],
                     [
                         'title' => 'Mobile',
+                        'slug' => 'mobile',
                         'children' => [
-                            ['title' => 'Samsung'],
-                            ['title' => 'iPhone'],
-                            ['title' => 'Xiomi'],
+                            ['title' => 'Samsung', 'slug' => 'Samsung'],
+                            ['title' => 'iPhone', 'slug' => 'iPhone'],
+                            ['title' => 'Xiomi', 'slug' => 'Xiomi'],
                         ],
                     ],
                 ],
+            ],
+            [
+                'title' => 'Electronics-2',
+                'slug' => 'electronics',
+                'children' => [
+                    [
+                        'title' => 'TV',
+                        'slug' => 'tv',
+                        'children' => [
+                            ['title' => 'LED', 'slug' => 'led'],
+                            ['title' => 'Blu-ray', 'slug' => 'blu-ray'],
+                        ],
+                    ],
+                    [
+                        'title' => 'Mobile',
+                        'slug' => 'mobile',
+                        'children' => [
+                            ['title' => 'Samsung', 'slug' => 'Samsung'],
+                            ['title' => 'iPhone', 'slug' => 'iPhone'],
+                            ['title' => 'Xiomi', 'slug' => 'Xiomi'],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'title' => 'Electronics',
+                'slug' => 'electronics-3',
+
             ],
         ];
         foreach($categories as $category)

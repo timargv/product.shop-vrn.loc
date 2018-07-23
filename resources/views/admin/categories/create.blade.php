@@ -27,15 +27,21 @@
                           <label for="exampleInputEmail1">Название</label>
                           <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ old('title')}}">
                       </div>
+
                       <div class="form-group">
-                          <label for="exampleInputEmail1">Позиция а</label>
-                          <input type="text" name="position" class="form-control" id="example1" placeholder="Позиция категории число" value="{{ old('position')}}">
+                          <label>Категории</label>
+                          {{Form::select('parent_id',
+                              $categories,
+                              null,
+                              ['class' => 'form-control select2'])
+                          }}
                       </div>
+
                   </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                  <a href="{{ route('categories.index')}}" class="btn btn-default ml-3">Назад</a>
+                  <a href="{{ route('catlists.index')}}" class="btn btn-default ml-3">Назад</a>
                   <button class="btn btn-success pull-right">Добавить</button>
               </div>
               <!-- /.box-footer-->
