@@ -12,3 +12,24 @@ $(document).ready(function (){
       radioClass: 'iradio_minimal-blue'
     });
 });
+
+
+$(function () {
+
+  //Enable check and uncheck all functionality
+  $(".icheckbox_minimal-blue").click(function () {
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+      //Uncheck all checkboxes
+      $(".tb-body div[aria-checked='true']").iCheck("false");
+      $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+    } else {
+      //Check all checkboxes
+      $(".tb-body input[type='checkbox']").iCheck("check");
+      $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+    }
+    $(this).data("clicks", !clicks);
+  });
+
+
+});

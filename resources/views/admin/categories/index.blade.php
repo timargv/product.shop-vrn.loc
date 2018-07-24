@@ -30,6 +30,7 @@
                   <div class="row">
                       <div class="col-xs-5">
                           <a href="{{route('categories.create')}}" class="btn btn-success">Добавить</a>
+
                       </div>
 
 
@@ -74,6 +75,7 @@
                                   <label style="margin-bottom: 0;">
                                       <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
                                   </label>
+
                               </div>
                               <div class="th-d tb-id">ID</div>
                               <div class="th-d tb-title">Название</div>
