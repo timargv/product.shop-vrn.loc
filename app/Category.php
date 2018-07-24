@@ -9,8 +9,8 @@ use  Kalnoy\Nestedset\NodeTrait;
 class Category extends Model
 {
 
-//    use Sluggable;
-    use NodeTrait;
+    use Sluggable;
+//    use NodeTrait;
 
     protected $fillable = ['title', 'parent_id', 'slug'];
 //

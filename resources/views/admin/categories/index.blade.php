@@ -38,19 +38,23 @@
 
 
                           <div class="col-xs-5">
-                              <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="">
+                              <input type="text" name="title" class="form-control " id="exampleInputEmail1" placeholder="Категория" value="">
                           </div>
 
-                          <div class=" col-xs-6">
+                          <div class="col-xs-5">
                               {{Form::select('parent_id',
                                   $catlist,
                                   null,
-                                  ['class' => 'form-control select2 '])
+                                  ['class' => 'form-control select2 ', 'placeholder' => 'Родительская категория'])
                               }}
                           </div>
 
+                          <div class="col-xs-2">
+                              <button class="btn btn-success pull-right">Добавить</button>
+                          </div>
+
                           {!! Form::close() !!}
-                      </div>
+
                   </div>
                   <div class="clearfix">
                       <div class="pull-left clearfix">
@@ -61,7 +65,7 @@
                       </div>
 
                   </div>
-
+                  <br />
 
                   <div class="div-table">
                       <div class="th-header">
@@ -186,6 +190,10 @@
 
 
               </div>
+
+              <div class="box-footer">
+              </div>
+
 
           </div>
 
