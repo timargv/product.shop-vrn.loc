@@ -28,21 +28,21 @@
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="row">
-                      <div class="col-xs-5">
+                      <div class="col-xs-3">
                           <a href="{{route('categories.create')}}" class="btn btn-success">Добавить</a>
 
                       </div>
 
 
-                          {!! Form::open(['route' => 'categories.store', 'class' => 'col-xs-7 clearfix']) !!}
+                          {!! Form::open(['route' => 'categories.store', 'class' => ' pull-right clearfix']) !!}
 
 
 
-                          <div class="col-xs-5">
+                          <div class="col-sm-4">
                               <input type="text" name="title" class="form-control " id="exampleInputEmail1" placeholder="Категория" value="">
                           </div>
 
-                          <div class="col-xs-5">
+                          <div class="col-sm-4">
                               {{Form::select('parent_id',
                                   $catlist,
                                   null,
@@ -50,8 +50,8 @@
                               }}
                           </div>
 
-                          <div class="col-xs-2">
-                              <button class="btn btn-success pull-right">Добавить</button>
+                          <div class="col-sm-4">
+                              <button class="btn btn-default pull-right"><i class="fa fa-plus-circle"></i> Быстро создать</button>
                           </div>
 
                           {!! Form::close() !!}
@@ -68,11 +68,12 @@
                   </div>
                   <br />
 
+                  @if (count($categories))
                   <div class="div-table">
                       <div class="th-header">
                           <div class="th-row">
                               <div class="th-d tb-input" style=" height: 32px;">
-                                  <label style="margin-bottom: 0;">
+                                  <label style="margin-bottom: -2px;">
                                       <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
                                   </label>
 
@@ -86,110 +87,120 @@
                           </div>
                       </div>
                       <div class="tb-body">
-                          @foreach($categories as $category)
-                              <div class="tr-row">
-                                  <div class="td-d tb-input">
-                                      <label style="margin-bottom: 0">
-                                          <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
-                                      </label>
-                                  </div>
-                                  <div class="td-d tb-id">{{$category->id}}</div>
-                                  <div class="td-d tb-title">
-                                      @if (count($category->children) != null)
-                                          <i class="fa fa-minus collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$category->id}}"></i>
-                                      @endif
-                                      {{$category->title}} - {{$category->slug}}
-                                  </div>
-                                  <div class="td-d tb-product-count">-</div>
-                                  <div class="td-d tb-status">1</div>
-                                  <div class="td-d tb-status-menu">1</div>
-                                  <div class="td-d tb-status-edit-del">
-                                      <div class="btn-group">
-                                          <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
 
-                                          {{Form::open(['route'=>['categories.destroy', $category->id], 'method'=>'delete',  'class' => 'btn btn-danger btn-xs'])}}
-                                          <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
-                                              <i class="fa fa-remove"></i>
-                                          </button>
+                            @foreach($categories as $category)
+                                <div class="tr-row">
+                                    <div class="td-d tb-input">
+                                        <label style="margin-bottom: -2px">
+                                            <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
+                                        </label>
+                                    </div>
+                                    <div class="td-d tb-id">{{$category->id}}</div>
+                                    <div class="td-d tb-title">
+                                        @if (count($category->children) != null)
+                                            <i class="fa fa-minus collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$category->id}}"></i>
+                                        @else
+                                          <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                        @endif
+                                        {{$category->title}}
+                                    </div>
+                                    <div class="td-d tb-product-count">-</div>
+                                    <div class="td-d tb-status">1</div>
+                                    <div class="td-d tb-status-menu">1</div>
+                                    <div class="td-d tb-status-edit-del">
+                                        <div class="btn-group">
+                                            <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
 
-                                          {{Form::close()}}
-                                      </div>
-                                  </div>
+                                            {{Form::open(['route'=>['categories.destroy', $category->id], 'method'=>'delete',  'class' => 'btn btn-danger btn-xs'])}}
+                                            <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
+                                                <i class="fa fa-remove"></i>
+                                            </button>
 
-                              </div>
-                              <div id="collapse_{{$category->id}}" class="panel-collapse collapse" style="background: rgba(247, 247, 247, 0.7);">
-                                  @foreach($category->children as $cats)
-                                      <div class="tr-row">
-                                          <div class="td-d tb-input">
-                                              <label style="margin-bottom: 0">
-                                                  <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
-                                              </label>
-                                          </div>
-                                          <div class="td-d tb-id">{{$cats->id}}</div>
-                                          <div class="td-d tb-title" style="padding-left: @if (count($cats->children) != null) 25px @else 20px @endif">
-                                              @if (count($cats->children) != null)
-                                                  <i class="fa fa-minus collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$cats->id}}"></i>
-                                              @endif
-                                              {{$cats->title}}
-                                          </div>
-                                          <div class="td-d tb-product-count">-</div>
-                                          <div class="td-d tb-status">1</div>
-                                          <div class="td-d tb-status-menu">1</div>
-                                          <div class="td-d tb-status-edit-del">
-                                              <div class="btn-group">
-                                                  <a href="{{route('categories.edit', $cats->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                            {{Form::close()}}
+                                        </div>
+                                    </div>
 
-                                                  {{Form::open(['route'=>['categories.destroy', $cats->id], 'method'=>'delete',  'class' => 'btn btn-danger btn-xs'])}}
-                                                  <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
-                                                      <i class="fa fa-remove"></i>
-                                                  </button>
+                                </div>
+                                <div id="collapse_{{$category->id}}" class="panel-collapse collapse" style="background: rgba(247, 247, 247, 0.7);">
+                                    @foreach($category->children as $cats)
+                                        <div class="tr-row">
+                                            <div class="td-d tb-input">
+                                                <label style="margin-bottom: -2px">
+                                                    <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
+                                                </label>
+                                            </div>
+                                            <div class="td-d tb-id">{{$cats->id}}</div>
+                                            <div class="td-d tb-title" style="padding-left: 30px">
+                                                @if (count($cats->children) != null)
+                                                    <i class="fa fa-minus collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$cats->id}}"></i>
+                                                @else
+                                                  <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                                @endif
+                                                {{$cats->title}}
+                                            </div>
+                                            <div class="td-d tb-product-count">-</div>
+                                            <div class="td-d tb-status">1</div>
+                                            <div class="td-d tb-status-menu">1</div>
+                                            <div class="td-d tb-status-edit-del">
+                                                <div class="btn-group">
+                                                    <a href="{{route('categories.edit', $cats->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
 
-                                                  {{Form::close()}}
-                                              </div>
-                                          </div>
+                                                    {{Form::open(['route'=>['categories.destroy', $cats->id], 'method'=>'delete',  'class' => 'btn btn-danger btn-xs'])}}
+                                                    <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
+                                                        <i class="fa fa-remove"></i>
+                                                    </button>
 
-                                      </div>
-                                      <div id="collapse_{{$cats->id}}" class="panel-collapse collapse" style="background: rgba(236, 236, 236, 0.44);">
-                                          @foreach($cats->children as $cat)
-                                              <div class="tr-row">
-                                                  <div class="td-d tb-input ">
-                                                      <label style="margin-bottom: 0">
-                                                          <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
-                                                      </label>
-                                                  </div>
-                                                  <div class="td-d tb-id">{{$cat->id}}</div>
-                                                  <div class="td-d tb-title" style="padding-left: @if (count($cat->children) != null) 50px @else 45px @endif">
-                                                      @if (count($cat->children) != null)
-                                                          <i class="fa fa-minus collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$cat->id}}"></i>
-                                                      @endif
-                                                      {{$cat->title}}
-                                                  </div>
-                                                  <div class="td-d tb-product-count">-</div>
-                                                  <div class="td-d tb-status">1</div>
-                                                  <div class="td-d tb-status-menu">1</div>
-                                                  <div class="td-d tb-status-edit-del">
-                                                      <div class="btn-group">
-                                                          <a href="{{route('categories.edit', $cat->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                                    {{Form::close()}}
+                                                </div>
+                                            </div>
 
-                                                          {{Form::open(['route'=>['categories.destroy', $cat->id], 'method'=>'delete',  'class' => 'btn btn-danger btn-xs'])}}
-                                                          <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
-                                                              <i class="fa fa-remove"></i>
-                                                          </button>
+                                        </div>
+                                        <div id="collapse_{{$cats->id}}" class="panel-collapse collapse" style="background: rgba(236, 236, 236, 0.44);">
+                                            @foreach($cats->children as $cat)
+                                                <div class="tr-row">
+                                                    <div class="td-d tb-input ">
+                                                        <label style="margin-bottom: -2px">
+                                                            <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false"><input type="checkbox" class="minimal"><ins class="iCheck-helper"></ins></div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="td-d tb-id">{{$cat->id}}</div>
+                                                    <div class="td-d tb-title" style="padding-left: 50px">
+                                                        @if (count($cat->children) != null)
+                                                            <i class="fa fa-minus collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$cat->id}}"></i>
+                                                        @else
+                                                          <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                                        @endif
+                                                        {{$cat->title}}
+                                                    </div>
+                                                    <div class="td-d tb-product-count">-</div>
+                                                    <div class="td-d tb-status">1</div>
+                                                    <div class="td-d tb-status-menu">1</div>
+                                                    <div class="td-d tb-status-edit-del">
+                                                        <div class="btn-group">
+                                                            <a href="{{route('categories.edit', $cat->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
 
-                                                          {{Form::close()}}
-                                                      </div>
-                                                  </div>
+                                                            {{Form::open(['route'=>['categories.destroy', $cat->id], 'method'=>'delete',  'class' => 'btn btn-danger btn-xs'])}}
+                                                            <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
+                                                                <i class="fa fa-remove"></i>
+                                                            </button>
 
-                                              </div>
-                                          @endforeach
-                                      </div>
-                                  @endforeach
-                              </div>
+                                                            {{Form::close()}}
+                                                        </div>
+                                                    </div>
 
-                          @endforeach
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                            @endforeach
+
                       </div>
                   </div>
-
+                  @else
+                    <h1 class="text-center">Пусто</h1>
+                  @endif
 
               </div>
 

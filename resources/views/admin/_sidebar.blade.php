@@ -5,7 +5,7 @@
             <i class="fa fa-dashboard"></i> <span>Админ-панель</span>
         </a>
     </li>
-    <li><a href="#"><i class="fa fa-sticky-note-o"></i> <span>Посты</span></a></li>
+    <li><a href="{{ route('products.index') }}"><i class="fa fa-sticky-note-o"></i> <span>Товары</span></a></li>
     <li><a href="{{ route('catlists.index') }}"><i class="fa fa-list-ul"></i> <span>Категории</span></a></li>
     <li><a href="#"><i class="fa fa-tags"></i> <span>Теги</span></a></li>
     <li>

@@ -13,16 +13,16 @@ class Category extends Model
 //    use NodeTrait;
 
     protected $fillable = ['title', 'parent_id', 'slug'];
-//
-//    // -------------------------
-//    public function products() {
-//        return $this->belongsToMany(
-//            Product::class,
-//            'products_categories',
-//            'category_id',
-//            'product_id'
-//        );
-//    }
+
+    // -------------------------
+    public function products() {
+       return $this->belongsToMany(
+           Product::class,
+           'products_categories',
+           'category_id',
+           'product_id'
+       );
+    }
 
 
     // --------------------------

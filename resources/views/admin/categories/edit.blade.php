@@ -28,15 +28,23 @@
                 <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $category->title }}">
               </div>
               <div class="form-group">
+                  <label>Категории</label>
+                  {{Form::select('parent_id',
+                      $categories,
+                      null,
+                      ['class' => 'form-control select2'])
+                  }}
+              </div>
+              <div class="form-group">
                   <label for="exampleInputEmail1">Название</label>
-                  <input type="text" name="position" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $category->position }}">
+                  <input type="text" name="slug" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ $category->slug }}">
               </div>
             </div>
           </div>
 
           <!-- /.box-body -->
           <div class="box-footer">
-            <button class="btn btn-default">Назад</button>
+            <a href="{{ route('catlists.index') }}" class="btn btn-default">Назад</a>
             <button class="btn btn-warning pull-right">Изменить</button>
           </div>
           <!-- /.box-footer-->

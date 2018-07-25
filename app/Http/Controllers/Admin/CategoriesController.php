@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 class CategoriesController extends Controller
 {
 
+    public function index()
+    {
+        return redirect(route('catlists.index'));
+    }
+
     // --------------------
     public function create() {
         $categories = Category::pluck('title', 'id')->all();
@@ -31,7 +36,8 @@ class CategoriesController extends Controller
     // --------------------
     public function edit($id) {
         $category = Category::find($id);
-        return view('admin.categories.edit', compact('category'));
+        $categories = Category::pluck('title', 'id')->all();
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
 
@@ -43,7 +49,7 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category->update($request->all());
 
-        return redirect()->route('categories.index');
+        return redirect()->route('catlists.index');
     }
 
 
