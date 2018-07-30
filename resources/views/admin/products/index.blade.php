@@ -32,12 +32,12 @@
               <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID</th>
+                  <th width="50px">ID</th>
+                  <th width="50px">Картинка</th>
                   <th>Название</th>
                   <th>Категория</th>
-                  <th>Теги</th>
-                  <th>Картинка</th>
-                  <th>Действия</th>
+                  <th>Цена</th>
+                  <th width="120px">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,12 +45,13 @@
                 @foreach ($products as $product)
                   <tr>
                     <td>{{ $product->id }}</td>
-                    <td>{{ $product->title }}</td>
-                    <td>{{$product->getCategoriesTitle()}}</td>
-                    <td>Laravel, PHP</td>
                     <td>
-                        <img src="{{$product->getImage()}}" alt="" width="100">
+                        <img src="{{ $product->getImage() }}" alt="" width="50">
                     </td>
+                    <td>{{ $product->title }}</td>
+                    <td>{{ $product->getCategoriesTitle() }}  </td>
+                    <td>{{ $product->price }}</td>
+
                     <td>
                       <div class="btn-group">
                           <a href="{{route('products.edit', $product->id)}}" class="btn btn-link btn-xs"><i class="fa fa-pencil"></i></a>
@@ -65,7 +66,6 @@
                   </tr>
                  @endforeach
 
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->

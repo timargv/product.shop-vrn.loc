@@ -17,7 +17,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::paginate(10);
-        return view('admin.products.index',compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $product->edit($request->all());
         $product->uploadImage($request->file('image'));
-        $product->setCategory($request->get('categories'));
+        $product->setCategories($request->get('categories'));
 
         return redirect(route('products.index'));
     }

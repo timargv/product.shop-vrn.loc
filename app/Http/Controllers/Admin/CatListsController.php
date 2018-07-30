@@ -13,7 +13,8 @@ class CatListsController extends Controller
         $categories = CatList::get()->toTree();
         $catlist = Category::pluck('title', 'id')->all();
 
-        return view('admin.categories.index', ['catlist' => $catlist, 'categories' => $categories, 'title' => 'Категории']);
+
+        return view('admin.categories.index', [ 'catlist' => $catlist, 'categories' => $categories, 'title' => 'Категории']);
     }
 
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property mixed $category
@@ -96,6 +97,16 @@ class Product extends Model
   }
 
   // --------------------------
+  public function getImage()
+  {
+    if($this->image == null)
+    {
+      return '/img/no-image.png';
+    }
+    return '/uploads/' . $this->image;
+  }
+
+  // --------------------------
   public function setCategories($ids)
   {
       if ($ids == null) { return; }
@@ -103,12 +114,12 @@ class Product extends Model
       $this->categories()->sync($ids);
   }
 
-
-  // --------------------------
-  public function getCategoriesTitles()
+  public function getCategoriesTitle()
   {
-      return (!$this->categories->isEmpty())   ?   implode(', ', $this->tags->pluck('title')->all()) : 'Нет тегов';
+      return (!$this->categories->isEmpty())   ?   implode(', ', $this->categories->pluck('title')->all()) : '-';
   }
+
+
 
 
 

@@ -28,9 +28,8 @@
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="row">
-                      <div class="col-xs-3">
+                      <div class="col-xs-2">
                           <a href="{{route('categories.create')}}" class="btn btn-success">Добавить</a>
-
                       </div>
 
 
@@ -42,15 +41,44 @@
                               <input type="text" name="title" class="form-control " id="exampleInputEmail1" placeholder="Категория" value="">
                           </div>
 
-                          <div class="col-sm-4">
-                              {{Form::select('parent_id',
-                                  $catlist,
-                                  null,
-                                  ['class' => 'form-control select2 ', 'placeholder' => 'Родительская категория'])
-                              }}
+
+                          <div class="col-sm-5">
+                            <select class="form-control select2"   data-placeholder="Выберите теги" name="parent_id">
+                              <option></option>
+                              @foreach ($categories as $cat)
+                                  <option value="{{ $cat->id }}" {{ $cat->id == old('cat') ? ' selected' : '' }}>
+
+                                    {{ $cat->title }}
+                                  </option>
+                                  @foreach ($cat->children as $cats)
+                                      <option value="{{ $cats->id }}" {{ $cats->id == old('cats') ? ' selected' : '' }}>
+                                         -
+                                        {{ $cats->title }}
+                                      </option>
+                                      @foreach ($cats->children as $catis)
+                                          <option value="{{ $catis->id }}" {{ $catis->id == old('catis') ? ' selected' : '' }}>
+                                             --
+                                            {{ $catis->title }}
+                                          </option>
+                                          @foreach ($catis->children as $catisi)
+                                              <option value="{{ $catisi->id }}" {{ $catisi->id == old('catisi') ? ' selected' : '' }}>
+                                                 ---
+                                                {{ $catisi->title }}
+                                              </option>
+                                              @foreach ($catisi->children as $catisis)
+                                                  <option value="{{ $catisis->id }}" {{ $catisis->id == old('catisis') ? ' selected' : '' }}>
+                                                     ---
+                                                    {{ $catisis->title }}
+                                                  </option>
+                                              @endforeach
+                                          @endforeach
+                                      @endforeach
+                                  @endforeach
+                              @endforeach
+                            </select>
                           </div>
 
-                          <div class="col-sm-4">
+                          <div class="col-sm-3">
                               <button class="btn btn-default pull-right"><i class="fa fa-plus-circle"></i> Быстро создать</button>
                           </div>
 

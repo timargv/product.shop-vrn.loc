@@ -14,7 +14,7 @@
         <!-- Main content -->
         <section class="content">
         {{Form::open([
-            'route'	=>	['posts.update', $product->id],
+            'route'	=>	['products.update', $product->id],
             'files'	=>	true,
             'method'	=>	'put'
         ])}}
@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group">
-                            <img src="{{$product->getImage()}}" alt="" class="img-responsive" width="200">
+                            <img src="{{-- $product->getImage() --}}" alt="" class="img-responsive" width="200">
                             <label for="exampleInputFile">Лицевая картинка</label>
                             <input type="file" id="exampleInputFile" name="image">
 
