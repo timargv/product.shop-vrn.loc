@@ -17,7 +17,7 @@ class Product extends Model
 
   use Sluggable;
 
-  protected $fillable = ['title'];
+  protected $fillable = ['title', 'num', 'price_dealer', 'price', 'quantity', 'slug'];
 
   // --------------------------
   public function categories()
@@ -56,7 +56,6 @@ class Product extends Model
   {
       $product = new static;
       $product->fill($fields);
-      $product->user_id = 1;
       $product->save();
 
       return $product;
@@ -73,7 +72,7 @@ class Product extends Model
   public function remove()
   {
       $this->removeImage();
-      $this->save();
+      $this->delete();
   }
 
   // --------------------------
@@ -118,6 +117,7 @@ class Product extends Model
   {
       return (!$this->categories->isEmpty())   ?   implode(', ', $this->categories->pluck('title')->all()) : '-';
   }
+
 
 
 

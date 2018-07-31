@@ -29,10 +29,11 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$product->title}}" name="title">
+                            {{$product->slug}}
                         </div>
 
                         <div class="form-group">
-                            <img src="{{-- $product->getImage() --}}" alt="" class="img-responsive" width="200">
+                            <img src="{{ $product->getImage() }}" alt="" class="img-responsive" width="200">
                             <label for="exampleInputFile">Лицевая картинка</label>
                             <input type="file" id="exampleInputFile" name="image">
 
@@ -40,7 +41,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Теги</label>
+                            <label>Категории</label>
                             {{Form::select('categories[]',
                                 $categories,
                                 $selectedCategories,
@@ -80,6 +81,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
+                    <a href="{{ route('products.index') }}" class="btn btn-default pull-left">Назад</a>
                     <button class="btn btn-warning pull-right">Изменить</button>
                 </div>
                 <!-- /.box-footer-->

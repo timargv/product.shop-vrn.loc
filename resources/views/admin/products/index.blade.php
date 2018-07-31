@@ -22,12 +22,20 @@
       <!-- Default box -->
       <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Листинг сущности</h3>
+              <h3 class="box-title">Товаров - {{ $productCount  }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
                 <a href="{{ route('products.create') }}" class="btn btn-success">Добавить</a>
+                <a href="{{ route('products.export') }}" class="btn btn-default">Export</a>
+                  <form method="post" action="{{ route('products.import') }}" enctype="multipart/form-data" class="form-inline pull-right">
+                      {{ csrf_field() }}
+                      <div class="form-group">
+                          <input type="file" name="file" id="exampleInputFile">
+                      </div>
+                      <button type="submit" class="btn btn-success">Импорт</button>
+                  </form>
               </div>
               <table class="table table-bordered table-striped">
                 <thead>
@@ -36,6 +44,7 @@
                   <th width="50px">Картинка</th>
                   <th>Название</th>
                   <th>Категория</th>
+                  <th>Артикул</th>
                   <th>Цена</th>
                   <th width="120px">Действия</th>
                 </tr>
@@ -46,22 +55,24 @@
                   <tr>
                     <td>{{ $product->id }}</td>
                     <td>
-                        <img src="{{ $product->getImage() }}" alt="" width="50">
+                        <img src="{{ $product->getImage() }}" alt="" width="100%">
                     </td>
                     <td>{{ $product->title }}</td>
-                    <td>{{ $product->getCategoriesTitle() }}  </td>
-                    <td>{{ $product->price }}</td>
+                      <td>{{ $product->getCategoriesTitle() }}</td>
+                      <td>{{ $product->num }}</td>
+                      <td>{{ $product->price }}</td>
 
                     <td>
                       <div class="btn-group">
                           <a href="{{route('products.edit', $product->id)}}" class="btn btn-link btn-xs"><i class="fa fa-pencil"></i></a>
 
-                          {{Form::open(['route'=>['products.destroy', $product->id], 'method'=>'delete',  'class' => 'btn btn-link btn-xs'])}}
+                          {!! Form::open(['route'=>['products.destroy', $product->id], 'method'=>'delete']) !!}
                           <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
                               <i class="fa fa-remove"></i>
                           </button>
 
-                          {{Form::close()}}
+                          {!! Form::close() !!}
+
                       </div>
                   </tr>
                  @endforeach
