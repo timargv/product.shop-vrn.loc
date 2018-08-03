@@ -19,7 +19,12 @@
     <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-
+<style media="screen">
+  .fa.fa-refresh::before {
+    margin: 0;
+    font-size: 14px !important;
+  }
+</style>
 
 
 <!-- Site wrapper -->

@@ -19,6 +19,7 @@
     <!-- Main content -->
     <section class="content">
 
+
       <!-- Default box -->
       <div class="box">
             <div class="box-header">
@@ -51,6 +52,32 @@
                 </thead>
                 <tbody>
 
+
+                  <tr>
+
+                    <td colspan="2" class="text-right"></td>
+
+                      <form class="" action="?" method="GET">
+                        <td>
+                              <input id="title" class="form-control" name="title" value="{{ request('title') }}" placeholder="Поиск товара...">
+                        </td>
+                        <td></td>
+
+                        <td>
+                              <input id="num" class="form-control" name="num" value="{{ request('num') }}" placeholder="Артикул товара">
+                        </td>
+                        <td>
+                              <a href="{{route('products.index')}}" class="btn btn-danger"><i class="fa fa-refresh"></i></a>
+                        </td>
+                        <td>
+                              <button type="submit" class="btn btn-primary">Search</button>
+                        </td>
+
+                      </form>
+                  </tr>
+
+
+
                 @foreach ($products as $product)
                   <tr>
                     <td>{{ $product->id }}</td>
@@ -64,9 +91,10 @@
 
                     <td>
                       <div class="btn-group">
+
+                          {!! Form::open(['route'=>['products.destroy', $product->id], 'method'=>'delete',  'class' => 'form-inline']) !!}
                           <a href="{{route('products.edit', $product->id)}}" class="btn btn-link btn-xs"><i class="fa fa-pencil"></i></a>
 
-                          {!! Form::open(['route'=>['products.destroy', $product->id], 'method'=>'delete']) !!}
                           <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-link btn-xs">
                               <i class="fa fa-remove"></i>
                           </button>

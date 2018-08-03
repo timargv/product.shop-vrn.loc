@@ -16,9 +16,22 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+
+        $query = Product::orderBy('id');
+
+
+        if (!empty($value = $request->get('title'))) {
+            $query->where('title', 'like', '%' . $value . '%');
+        }
+
+        if (!empty($value = $request->get('num'))) {
+            $query->where('num', 'like', '%' . $value . '%');
+        }
+
+        $products = $query->paginate(10);
+
         $productCount = DB::table('products')->count();
         return view('admin.products.index', compact('products', 'productCount'));
     }
