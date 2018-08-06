@@ -47,6 +47,10 @@
                                 $selectedCategories,
                                 ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите категории'])
                             }}
+
+                            
+
+
                         </div>
 
                         <div class="form-group">

@@ -18,12 +18,17 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::get('/', 'DashboardController@index');
-    Route::resource('catlists', 'CatListsController');
     Route::resource('categories', 'CategoriesController');
+
+    Route::resource('catlists', 'CatListsController');
+
+ 
     Route::resource('products', 'ProductsController');
+
 
 
     Route::get('/products-export', 'ProductsController@export')->name('products.export');
     Route::post('/products-import', 'ProductsController@import')->name('products.import');
+
 
 });

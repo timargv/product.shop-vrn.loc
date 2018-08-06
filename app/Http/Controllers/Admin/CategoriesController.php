@@ -58,6 +58,7 @@ class CategoriesController extends Controller
         Category::find($id)->delete();
         return redirect(route('catlists.index'));
     }
+ 
 
 
 }

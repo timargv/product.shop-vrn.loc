@@ -32,57 +32,27 @@
                           <a href="{{route('categories.create')}}" class="btn btn-success">Добавить</a>
                       </div>
 
+                      {!! Form::open(['route' => 'categories.store', 'class' => ' pull-right clearfix']) !!}
+                      <div class="col-sm-4">
+                          <input type="text" name="title" class="form-control " id="exampleInputEmail1" placeholder="Категория" value="">
+                      </div>
+                      <div class="col-sm-5">
 
-                          {!! Form::open(['route' => 'categories.store', 'class' => ' pull-right clearfix']) !!}
+                        <select class="form-control select2"   data-placeholder="Выберите теги" name="parent_id">
+                            <option></option>
+                            @foreach ($categoryList as $categoryL)
+                                <option value="{{ $categoryL->id }}"{{ $categoryL->id == old('parent') ? ' selected' : '' }}>
+                                    @for ($i = 0; $i < $categoryL->depth; $i++) &mdash; @endfor
+                                    {{ $categoryL->title }}
+                                </option>
+                            @endforeach;
+                        </select>
+                      </div>
 
-
-
-                          <div class="col-sm-4">
-                              <input type="text" name="title" class="form-control " id="exampleInputEmail1" placeholder="Категория" value="">
-                          </div>
-
-
-                          <div class="col-sm-5">
-                            <select class="form-control select2"   data-placeholder="Выберите теги" name="parent_id">
-                              <option></option>
-                              @foreach ($categories as $cat)
-                                  <option value="{{ $cat->id }}" {{ $cat->id == old('cat') ? ' selected' : '' }}>
-
-                                    {{ $cat->title }}
-                                  </option>
-                                  @foreach ($cat->children as $cats)
-                                      <option value="{{ $cats->id }}" {{ $cats->id == old('cats') ? ' selected' : '' }}>
-                                         -
-                                        {{ $cats->title }}
-                                      </option>
-                                      @foreach ($cats->children as $catis)
-                                          <option value="{{ $catis->id }}" {{ $catis->id == old('catis') ? ' selected' : '' }}>
-                                             --
-                                            {{ $catis->title }}
-                                          </option>
-                                          @foreach ($catis->children as $catisi)
-                                              <option value="{{ $catisi->id }}" {{ $catisi->id == old('catisi') ? ' selected' : '' }}>
-                                                 ---
-                                                {{ $catisi->title }}
-                                              </option>
-                                              @foreach ($catisi->children as $catisis)
-                                                  <option value="{{ $catisis->id }}" {{ $catisis->id == old('catisis') ? ' selected' : '' }}>
-                                                     ---
-                                                    {{ $catisis->title }}
-                                                  </option>
-                                              @endforeach
-                                          @endforeach
-                                      @endforeach
-                                  @endforeach
-                              @endforeach
-                            </select>
-                          </div>
-
-                          <div class="col-sm-3">
-                              <button class="btn btn-default pull-right"><i class="fa fa-plus-circle"></i> Быстро создать</button>
-                          </div>
-
-                          {!! Form::close() !!}
+                      <div class="col-sm-3">
+                          <button class="btn btn-default pull-right"><i class="fa fa-plus-circle"></i> Быстро создать</button>
+                      </div>
+                      {!! Form::close() !!}
 
                   </div>
                   <div class="clearfix">
@@ -134,7 +104,9 @@
                                     </div>
                                     <div class="td-d tb-product-count">-</div>
                                     <div class="td-d tb-status">1</div>
-                                    <div class="td-d tb-status-menu">1</div>
+                                    <div class="td-d tb-status-menu">
+                                         -
+                                    </div>
                                     <div class="td-d tb-status-edit-del">
                                         <div class="btn-group">
                                             <a href="{{route('categories.edit', $category->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
